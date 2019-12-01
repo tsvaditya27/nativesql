@@ -1,0 +1,28 @@
+·   	In the cloud sdk or cloud console enter the following commands. Make sure that the project-id is set.
+      1.  gcloud sql instances create bookshelf --tier=db-f1-micro --region=us-central1
+      2.  gcloud sql users set-password root --host=% --instance=bookshelf --password=root
+      3.  gcloud sql databases create book_data --instance=bookshelf
+      4.  gsutil mb -l us-central1 gs://picture-storage/
+·   	If creating a new bucket fails, try giving a different name or creating a bucket manually.
+·     Then Clone the repository https://github.com/GoogleCloudPlatform/php-docs-samples and navigate to appengine/php72/getting-started/
+·     The Directory Structure will be
+·     Replace the text in app.yaml with (dont keep quotes, don't forget to enter the project id)
+
+runtime: php72
+env_variables:
+  GOOGLE_STORAGE_BUCKET: BUCKET_NAME
+  CLOUDSQL_CONNECTION_NAME: PROJECT_ID:us-central1:bookshelf
+  CLOUDSQL_USER: root
+  CLOUDSQL_PASSWORD: root
+  CLOUDSQL_DATABASE_NAME: book_data
+  
+·   	Navigate to src/app.php and change the variables (keep in quotes here) and uncomment them
+·   	Go back to the getting-started folder and run the command
+          gcloud app deploy
+·   	It may ask you to authenticate for the command.
+·   	After it complete run the command
+          gcloud app deploy
+·     If its ask for region enter 12 (it corresponds to us-central-1)
+·   	After it complete run the command
+·   	gcloud app browse
+·   	you can open the link in browser to see the running application
